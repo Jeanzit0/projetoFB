@@ -1,0 +1,67 @@
+let banco_de_dados = Array("");
+
+for(i=1;i>0;i++){
+  
+  let programa = prompt ('Você deseja:\n\n 1-criar um novo protocólo  2-verificar protocolos existentes  999-finalizar o programa');
+                  if(programa==='999'){
+                    console.log('volte sempre!')
+                    break;
+                  }else if(programa==='2'){
+                    console.table(banco_de_dados);
+                  }else if(programa==='1'){
+  
+      let tipo_plano = prompt ('cliente usa:\n\n 1-Fibra  2-Cabo  3-rádio');
+        switch(tipo_plano){
+          case '1':
+            banco_de_dados[i] += '1';
+            break;
+          case '2':
+            banco_de_dados[i] += '2';
+            break;
+          case '3':
+            banco_de_dados[i] += '3';
+            break;    
+              default:
+                break;
+        }
+      let tipo_preferencia = prompt ('cliente tem preferência:\n\n 1-Residencial  2-Empresarial  3-Dedicado');
+         switch(tipo_preferencia){
+          case '1':
+            banco_de_dados[i] += '1';
+            break;
+          case '2':
+            banco_de_dados[i] += '2';
+            break;
+          case '3':
+            banco_de_dados[i] += '3';
+            break;    
+              default:
+                break;
+         }
+      let tipo_alarme = prompt ('cliente tem alarmes:\n\n 1-Link_Loss  2-Board_Aport  3-Dying_Gasp  4-Overtrash');
+         switch(tipo_alarme){
+          case '1':
+            banco_de_dados[i] += '1';
+            break;
+          case '2':
+            banco_de_dados[i] += '2';
+            break;
+          case '3':
+            banco_de_dados[i] += '3';
+            break;
+          case '4':
+            banco_de_dados[i] += '4';
+            break;
+              default:
+             console.log('codigo invalido\n\n')
+                break;
+         }
+  }else{
+    console.log('codigo invalido\n\n')
+    break;
+  }
+}
+
+
+  
+  
