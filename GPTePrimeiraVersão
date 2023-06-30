@@ -12,7 +12,7 @@ const connection = mysql.createConnection({
 
   let i = 1;
   while (true) {
-    let programa = prompt('Você deseja: 1-criar um novo protocolo  2-verificar protocolos existentes  999-finalizar o programa');
+    let programa = prompt('Você deseja: 1-criar um novo protocolo  2-verificar protocolos existentes  999-finalizar o programa ');
 
     if (programa === '999') {
       console.log('Volte sempre!');
@@ -26,9 +26,9 @@ const connection = mysql.createConnection({
         console.log(results);
       });
     } else if (programa === '1') {
-      let nome = prompt('Qual o nome completo da pessoa?');
+      let nome = prompt('Qual o nome completo da pessoa? ');
 
-      let tipo_plano = prompt('1-Fibra  2-Cabo  3-Rádio');
+      let tipo_plano = prompt('1-Fibra  2-Cabo  3-Rádio ');
         switch(tipo_plano){
           case '1':
             alfa_pro += 'F'
@@ -39,9 +39,12 @@ const connection = mysql.createConnection({
           case '3':
             alfa_pro += 'R'
           break;
+          default:
+                console.log("Você digitou um número inválido, tente novamente.\n")
+          break;
         }
       
-      let tipo_trip = prompt('1-Trip  2-FBnet');
+      let tipo_trip = prompt('1-Trip  2-FBnet ');
         switch(tipo_trip){
           case '1':
             alfa_pro += 'Tp'
@@ -49,9 +52,12 @@ const connection = mysql.createConnection({
           case '2':
             alfa_pro += 'Fb'
           break;
+          default:
+                console.log("Você digitou um número inválido, tente novamente.\n")
+          break;
         }
       
-      let tipo_preferencia = prompt('1-Residencial  2-Empresarial  3-Dedicado');
+      let tipo_preferencia = prompt('1-Residencial  2-Empresarial  3-Dedicado ');
         switch(tipo_preferencia){
           case '1':
             alfa_pro += 'R'
@@ -62,9 +68,12 @@ const connection = mysql.createConnection({
           case '3':
             alfa_pro += 'D'
           break;
+          default:
+                console.log("Você digitou um número inválido, tente novamente.\n")
+          break;
         }
       
-      let tipo_alarme = prompt('1-Link_Loss  2-Board_Aport  3-Dying_Gasp  4-Overtrash');
+      let tipo_alarme = prompt('1-Link_Loss  2-Board_Aport  3-Dying_Gasp  4-Overtrash ');
         switch(tipo_alarme){
           case '1':
             alfa_pro += 'll'
@@ -78,8 +87,11 @@ const connection = mysql.createConnection({
           case '4':
             alfa_pro += 'ot'
           break;
+          default:
+                console.log("Você digitou um número inválido, tente novamente.\n")
+          break;
         }
-      let tipo_rote = prompt('1-Comodato  2-Próprio');
+      let tipo_rote = prompt('1-Comodato  2-Próprio ');
         switch(tipo_rote){
           case '1':
             alfa_pro += 'Com'
@@ -87,8 +99,11 @@ const connection = mysql.createConnection({
           case '2':
             alfa_pro += 'Pro'
           break;
+          default:
+                console.log("Você digitou um número inválido, tente novamente.\n")
+          break;
         }
-      let tipo_roteA = prompt('1-Tenho acesso  2-Não tenho acesso');
+      let tipo_roteA = prompt('1-Tenho acesso  2-Não tenho acesso ');
         switch(tipo_roteA){
           case '1':
             alfa_pro += 'Ta'
@@ -96,8 +111,11 @@ const connection = mysql.createConnection({
           case '2':
             alfa_pro += 'Sa'
           break;
+          default:
+                console.log("Você digitou um número inválido, tente novamente.\n")
+          break;
         }
-      let tipo_sinal = prompt('1-Ruim(-30dbm ^)  2-Preocupante(-27dbm)  3-Bom(-26dbm v)');
+      let tipo_sinal = prompt('1-Ruim(-30dbm ^)  2-Preocupante(-27dbm)  3-Bom(-26dbm v) ');
         switch(tipo_sinal){
           case '1':
             alfa_pro += 'R'
@@ -108,8 +126,11 @@ const connection = mysql.createConnection({
           case '3':
             alfa_pro += 'B'
           break;
+          default:
+                console.log("Você digitou um número inválido, tente novamente.\n")
+          break;
         }
-      let tipo_aut = prompt('1-Router  2-Bridge');
+      let tipo_aut = prompt('1-Router  2-Bridge ');
         switch(tipo_aut){
           case '1':
             alfa_pro += 'rtr'
@@ -117,8 +138,11 @@ const connection = mysql.createConnection({
           case '2':
             alfa_pro += 'brg'
           break;
+          default:
+                console.log("Você digitou um número inválido, tente novamente.\n")
+          break;
         }
-      let tipo_login = prompt('1-Admin  2-User  3-Multipro');
+      let tipo_login = prompt('1-Admin  2-User  3-Multipro ');
         switch(tipo_login){
           case '1':
             alfa_pro += 'A'
@@ -129,8 +153,11 @@ const connection = mysql.createConnection({
           case '3':
             alfa_pro += 'M'
           break;
+          default:
+                console.log("Você digitou um número inválido, tente novamente.\n")
+          break;
         }
-      let tipo_login_senha = prompt ('1-PPPoE  2-Fb@2+PPPoE  3-*123FBmudar')
+      let tipo_login_senha = prompt ('1-PPPoE  2-Fb@2+PPPoE  3-*123FBmudar ')
         switch(tipo_login_senha){
           case '1':
             alfa_pro += 'PP'
@@ -141,12 +168,14 @@ const connection = mysql.createConnection({
           case '3':
             alfa_pro += '*1'
           break;
+          default:
+                console.log("Você digitou um número inválido, tente novamente.\n")
+          break;
         }
         
       let codigo = `${tipo_plano}${tipo_trip}${tipo_preferencia}${tipo_alarme}${tipo_rote}${tipo_roteA}${tipo_sinal}${tipo_aut}${tipo_login}${tipo_login_senha}`;
         
-      
-      let sql = 'INSERT INTO protocol (alfa_pro, codigo, nome) VALUES (?, ?, ?)';
+      let sql = 'INSERT INTO protocol (alfa_pro, codigo, nome, data_hora) VALUES (?, ?, ?, CURRENT_TIMESTAMP)';
       let values = [alfa_pro, codigo, nome];
 
       connection.query(sql, values, (err) => {
@@ -158,7 +187,6 @@ const connection = mysql.createConnection({
       });
     } else {
       console.log('Código inválido\n\n');
-      break;
     }
 
     i++;
