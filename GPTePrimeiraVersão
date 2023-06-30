@@ -1,0 +1,167 @@
+const mysql = require('mysql');
+const prompt = require('prompt-sync')();
+
+let alfa_pro = '';
+
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'clientes'
+});
+
+  let i = 1;
+  while (true) {
+    let programa = prompt('Você deseja: 1-criar um novo protocolo  2-verificar protocolos existentes  999-finalizar o programa');
+
+    if (programa === '999') {
+      console.log('Volte sempre!');
+      break;
+    } else if (programa === '2') {
+      connection.query('SELECT * FROM protocol', (err, results) => {
+        if (err) {
+          console.error('Erro ao verificar protocolos existentes:', err);
+          return;
+        }
+        console.log(results);
+      });
+    } else if (programa === '1') {
+      let nome = prompt('Qual o nome completo da pessoa?');
+
+      let tipo_plano = prompt('1-Fibra  2-Cabo  3-Rádio');
+        switch(tipo_plano){
+          case '1':
+            alfa_pro += 'F'
+          break;
+          case '2':
+            alfa_pro += 'C'
+          break;
+          case '3':
+            alfa_pro += 'R'
+          break;
+        }
+      
+      let tipo_trip = prompt('1-Trip  2-FBnet');
+        switch(tipo_trip){
+          case '1':
+            alfa_pro += 'Tp'
+          break;
+          case '2':
+            alfa_pro += 'Fb'
+          break;
+        }
+      
+      let tipo_preferencia = prompt('1-Residencial  2-Empresarial  3-Dedicado');
+        switch(tipo_preferencia){
+          case '1':
+            alfa_pro += 'R'
+          break;
+          case '2':
+            alfa_pro += 'E'
+          break;
+          case '3':
+            alfa_pro += 'D'
+          break;
+        }
+      
+      let tipo_alarme = prompt('1-Link_Loss  2-Board_Aport  3-Dying_Gasp  4-Overtrash');
+        switch(tipo_alarme){
+          case '1':
+            alfa_pro += 'll'
+          break;
+          case '2':
+            alfa_pro += 'ba'
+          break;
+          case '3':
+            alfa_pro += 'dg'
+          break;
+          case '4':
+            alfa_pro += 'ot'
+          break;
+        }
+      let tipo_rote = prompt('1-Comodato  2-Próprio');
+        switch(tipo_rote){
+          case '1':
+            alfa_pro += 'Com'
+          break;
+          case '2':
+            alfa_pro += 'Pro'
+          break;
+        }
+      let tipo_roteA = prompt('1-Tenho acesso  2-Não tenho acesso');
+        switch(tipo_roteA){
+          case '1':
+            alfa_pro += 'Ta'
+          break;
+          case '2':
+            alfa_pro += 'Sa'
+          break;
+        }
+      let tipo_sinal = prompt('1-Ruim(-30dbm ^)  2-Preocupante(-27dbm)  3-Bom(-26dbm v)');
+        switch(tipo_sinal){
+          case '1':
+            alfa_pro += 'R'
+          break;
+          case '2':
+            alfa_pro += 'P'
+          break;
+          case '3':
+            alfa_pro += 'B'
+          break;
+        }
+      let tipo_aut = prompt('1-Router  2-Bridge');
+        switch(tipo_aut){
+          case '1':
+            alfa_pro += 'rtr'
+          break;
+          case '2':
+            alfa_pro += 'brg'
+          break;
+        }
+      let tipo_login = prompt('1-Admin  2-User  3-Multipro');
+        switch(tipo_login){
+          case '1':
+            alfa_pro += 'A'
+          break;
+          case '2':
+            alfa_pro += 'U'
+          break;
+          case '3':
+            alfa_pro += 'M'
+          break;
+        }
+      let tipo_login_senha = prompt ('1-PPPoE  2-Fb@2+PPPoE  3-*123FBmudar')
+        switch(tipo_login_senha){
+          case '1':
+            alfa_pro += 'PP'
+          break;
+          case '2':
+            alfa_pro += 'Fb'
+          break;
+          case '3':
+            alfa_pro += '*1'
+          break;
+        }
+        
+      let codigo = `${tipo_plano}${tipo_trip}${tipo_preferencia}${tipo_alarme}${tipo_rote}${tipo_roteA}${tipo_sinal}${tipo_aut}${tipo_login}${tipo_login_senha}`;
+        
+      
+      let sql = 'INSERT INTO protocol (alfa_pro, codigo, nome) VALUES (?, ?, ?)';
+      let values = [alfa_pro, codigo, nome];
+
+      connection.query(sql, values, (err) => {
+        if (err) {
+          console.error('Erro ao inserir dados:', err);
+          return;
+        }
+        console.log('Dados inseridos com sucesso!');
+      });
+    } else {
+      console.log('Código inválido\n\n');
+      break;
+    }
+
+    i++;
+  }
+
+  connection.end();
