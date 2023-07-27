@@ -1,0 +1,51 @@
+const prompt = require('prompt-sync')();
+
+let vetCax = [];
+let i = 0;
+let k = 0;
+let m = 0;
+let vetDeAte = [];
+let vetCaxInd = [];
+
+function sequenciaRompimento(caxInicial, caxFinal) {
+  let conta = caxFinal - caxInicial-1;
+  vetCax[i] = caxInicial;
+
+  for (let j=0; j<=conta; j++) {
+    let soma = vetCax[i] + 1;
+    vetCax[i+1] = soma;
+    i++;
+  }
+}
+
+while (true) {
+
+    let perguntaII = Number(prompt('Em sequência? 1-Sim / 2-Não / 0-Encerrar: '));
+
+    if (perguntaII === 1) {
+      let caxInicial = Number(prompt('Qual a caixa inicial? '));
+        vetDeAte[k] = `De ${caxInicial} `;
+      
+        let caxFinal = Number(prompt('Qual a caixa final? '));
+        vetDeAte[k] += `Até ${caxFinal} `;
+        k++;
+        sequenciaRompimento(caxInicial, caxFinal);
+      console.log(`Caixas: ${vetCax}\n`);
+    } else if (perguntaII == 2){
+      console.log('\n0 = Parar\n')
+        for(m=0; m>-1; m++){
+        let caxIndiv = Number(prompt('Caixa: '));
+        if(caxIndiv === 0){
+          break;
+        }
+        vetCaxInd[m]=(caxIndiv);    
+      }
+    }else{
+        break;
+    }
+  }
+
+
+console.log(`\nCaixas: ${vetCax}\n`);
+console.log(vetDeAte);
+console.log(vetCaxInd)
